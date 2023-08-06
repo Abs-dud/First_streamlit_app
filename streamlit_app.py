@@ -37,15 +37,16 @@ except URLErorr as e:
     st.error()
   
 #adding code to fetch data from snowflake
-st.header("The Fruit load List Contains: ")
+st.header("View Our Fruit List - Add Your Favorite! ")
 def get_fruit_load_list():
   with my_cnx.cursor() as my_cur:
     my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
     return my_cur.fetchall()
 #Adding a Button to the fruit
-if st.button('get fruit load list'):
+if st.button('get fruit list'):
   my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
   my_data_rows = get_fruit_load_list()
+  my_cnx.close()
   st.dataframe(my_data_rows)
 #st.stop()  
 def insert_row_snowflake(new_fruit):
@@ -57,6 +58,7 @@ add_my_fruit = st.text_input('What fruit would you like to add?')
 if st.button('Add a Fruit to the List'):
   my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
   back_from_function = insert_row_snowflake(add_my_fruit)
+  my_cnx.close()
   st.text(back_from_function)
 
 
