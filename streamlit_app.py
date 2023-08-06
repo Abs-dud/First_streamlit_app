@@ -20,7 +20,7 @@ st.dataframe(fruit_to_show)
 # new section to see Fruityvice response
 st.header("Fruityvice Fruit Advice!")
 try:
-  fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
+  fruit_choice = st.text_input('What fruit would you like information about?')
   if not fruit_choice:
     st.error('please select a fruit to get information.')
   else:  
