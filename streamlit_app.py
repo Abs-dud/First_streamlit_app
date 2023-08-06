@@ -35,6 +35,6 @@ st.header("The Fruit load List Contains: ")
 st.dataframe(my_data_rows)
 add_my_fruit = st.text_input('What fruit would you like to add?','jackfruit')
 st.write('Thanks for adding ', add_my_fruit)
-my_cur.execute("insert into FRUIT_LOAD_LIST values ('from st)")
+my_cur.execute("insert into FRUIT_LOAD_LIST values ('from st')")
 
 
