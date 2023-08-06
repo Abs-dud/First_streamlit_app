@@ -41,7 +41,7 @@ st.header("The Fruit load List Contains: ")
 def get_fruit_load_list():
   with my_cnx.cursor() as my_cur:
     my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
-  return my_cur.fetchall()
+    return my_cur.fetchall()
 #Adding a Button to the fruit
 if st.button('get fruit load list'):
   my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
