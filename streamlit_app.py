@@ -32,7 +32,7 @@ my_cur = my_cnx.cursor()
 my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
 my_data_row = my_cur.fetchone()
 st.text("The Fruit load List Contains: ")
-st.text(my_data_row)
+st.dataframe(my_data_row)
 
 
 
