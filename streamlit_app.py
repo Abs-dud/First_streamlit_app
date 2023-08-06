@@ -36,14 +36,18 @@ try:
 except URLErorr as e:
     st.error()
   
-st.stop()
 #adding code to fetch data from snowflake
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
-my_data_rows = my_cur.fetchall()
 st.header("The Fruit load List Contains: ")
-st.dataframe(my_data_rows)
+def get_fruit_load_list():
+  with my_cnx.cursor() as my_cur:
+  my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
+  return my_cur.fetchall()
+#Adding a Button to the fruit
+if st.button('get fruit load list'):
+  my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+  my_data_rows = get_fruit_load_list()
+  st.dataframe(my_data_rows)
+st.stop()  
 add_my_fruit = st.text_input('What fruit would you like to add?','jackfruit')
 st.write('Thanks for adding ', add_my_fruit)
 my_cur.execute("insert into FRUIT_LOAD_LIST values ('from streamlit')")
