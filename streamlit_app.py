@@ -17,6 +17,12 @@ fruit_selected = st.multiselect("Pick some fruits:", list(my_fruit_list.index),[
 fruit_to_show = my_fruit_list.loc[fruit_selected]
 st.dataframe(fruit_to_show)
 
+#adding function here
+def get_fruityvice_data(this_fruit_choice):
+  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+  fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+  return fruityvice_normalized
+  
 # new section to see Fruityvice response
 st.header("Fruityvice Fruit Advice!")
 try:
@@ -25,9 +31,8 @@ try:
     st.error('please select a fruit to get information.')
   else:  
     st.write('The user entered ', fruit_choice)
-    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-    st.dataframe(fruityvice_normalized)
+    back_from_function = get_fruityvice_data(fruit_choice)
+    st.dataframe(back_from_function)
 except URLErorr as e:
     st.error()
   
