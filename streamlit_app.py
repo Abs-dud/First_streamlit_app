@@ -49,7 +49,7 @@ if st.button('get fruit load list'):
   st.dataframe(my_data_rows)
 #st.stop()  
 def insert_row_snowflake(new_fruit):
-  with mycnx.cursor() as my_cur:
+  with my_cnx.cursor() as my_cur:
     my_cur.execute("insert into FRUIT_LOAD_LIST values ('new_fruit')")
     return "Thanks for adding "+new_fruit
     
